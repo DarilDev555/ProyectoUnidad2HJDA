@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
+import { EpicComponent } from './pages/epic/epic.component';
 
 export const routes: Routes = [
     {
@@ -7,4 +8,8 @@ export const routes: Routes = [
     component: LoginComponent,
     },
 
+    {
+        path: 'epic',
+        component: EpicComponent,
+    }
 ];

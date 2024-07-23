@@ -1,0 +1,122 @@
+/* table-epic.component.css */
+
+/* General table styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #043c7c;
+    /* Dark Cerulean */
+    color: white;
+}
+
+#date-table {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2vh;
+}
+
+#date-table mat-form-field {
+    width: auto;
+    margin-right: 20px;
+}
+
+th {
+    background-color: #096bb3;
+    /* Honolulu Blue */
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #0c0c0c;
+    /* Black Wash */
+    color: white;
+}
+
+/* Image cell styling */
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Action buttons styling */
+button.mat-fab {
+    background-color: #043c7c;
+    /* Dark Cerulean */
+    color: white;
+    margin: 0 5px;
+}
+
+#button-accion {
+    background-color: #043c7c;
+    /* Dark Cerulean */
+    color: white;
+    margin: 10px;
+
+}
+
+#button-accion mat-icon {
+    color: white;
+    height: 2px;
+    width: 2px;
+}
+
+
+.example-flex-container {
+    display: flex;
+    justify-content: center;
+}
+
+.example-button-container {
+    display: flex;
+    justify-content: center;
+    width: 60px;
+}
+
+/* Pagination styling */
+mat-paginator {
+    background-color: #80c5f8;
+    /* Light Sky Blue */
+    color: #0c0c0c;
+    /* Black */
+}
+
+mat-paginator mat-button,
+mat-paginator mat-icon-button {
+    color: #0c0c0c;
+    /* Black */
+}
+
+/* Datepicker styling */
+mat-form-field {
+    width: auto;
+}
+
+mat-form-field-appearance-legacy mat-form-field-wrapper {
+    background-color: #075791;
+    /* Medium Electric Blue */
+}
+
+mat-datepicker-toggle-active mat-icon {
+    color: white;
+}
+
+mat-datepicker-content {
+    background-color: #096bb3;
+    /* Honolulu Blue */
+    color: white;
+}
+
+/* Header row styling */
+tr.mat-header-row {
+    background-color: #075791;
+    /* Medium Electric Blue */
+    color: white;
+}
+
+/* Row hover effect */
+tr.mat-row:hover {
+    background-color: #80c5f8;
+    /* Light Sky Blue */
+}

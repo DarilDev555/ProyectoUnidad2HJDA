@@ -11,9 +11,9 @@
             <div class="is-usuario">
                 <mat-form-field appearance="fill">
                     <mat-label>Ingrese su Usuario</mat-label>
-                    <input [(ngModel)]="user" matInput placeholder="">
+                    <input [(ngModel)]="user" matInput placeholder="" (blur)="updateErrorMessage()" required />
+                    <mat-error *ngIf="errorMessage() || authenticationError()">{{ errorMessage() }}</mat-error>
                     <mat-icon matSuffix>person</mat-icon>
-                    <!-- <mat-hint>Hint</mat-hint> -->
                 </mat-form-field>
             </div>
             <h2>Contraseña</h2>
@@ -23,11 +23,11 @@
                     <input [(ngModel)]="password" matInput [type]="hide() ? 'password' : 'text'" />
                     <button mat-icon-button matSuffix (click)="clickEvent($event)" [attr.aria-label]="'Hide password'"
                         [attr.aria-pressed]="hide()">
-                        <mat-icon>{{hide() ? 'visibility_off' : 'visibility'}}</mat-icon>
+                        <mat-icon>{{ hide() ? 'visibility_off' : 'visibility' }}</mat-icon>
                     </button>
+                    <mat-error *ngIf="errorMessage() || authenticationError()">{{ errorMessage() }}</mat-error>
                 </mat-form-field>
             </div>
-
             <div class="is-form-button">
                 <button mat-flat-button type="button" (click)="ingresar()">Ingresar</button>
             </div>

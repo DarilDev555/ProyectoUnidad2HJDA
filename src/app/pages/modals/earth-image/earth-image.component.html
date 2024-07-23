@@ -1,0 +1,21 @@
+
+    <div id="image-EI">
+        <img src="{{ obternerImagen(data.date, data.image) }}" alt="Earth Image" height="500" width="500">
+    </div>
+    <div class="info">
+            <h2><b>Identificador: </b> {{data.identifier}}</h2>
+            <h3><b>Descripcion</b> {{data.caption}}</h3>
+            <h3><b>Fecha:</b> {{data.date}}</h3>
+            <h3><b>Versión:</b> {{data.version}}</h3>
+            <h3><b>Posición Lunar: </b> <br>
+                X: {{data.lunar_j2000_position.x}}<br>
+                Y: {{data.lunar_j2000_position.y}}<br>
+                Z: {{data.lunar_j2000_position.z}}
+            </h3>
+            
+            <h3><b>Posición Solar: </b> <br>
+                X: {{data.sun_j2000_position.x}}<br>
+                Y: {{data.sun_j2000_position.y}}<br>
+                Z: {{data.sun_j2000_position.z}}
+            </h3>
+    </div>

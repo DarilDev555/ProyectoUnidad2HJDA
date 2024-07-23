@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'ProyectoUnidad2HJDA';
+  
 
   constructor(private router: Router) { }
 

@@ -1,0 +1,48 @@
+
+.info{
+    background-color: #043c7c;
+    padding-left: 20px;;
+}
+
+
+#modal-contenedor {
+    background-color: #043c7c;
+    /* Dark Cerulean */
+}
+
+#image-EI {
+    background-color: #043c7c;
+    text-align: center;
+}
+
+#image-EI img {
+    border: 3px solid #096bb3;
+    /* Honolulu Blue */
+    border-radius: 10px;
+}
+
+.info {
+    color: white;
+    background-color: #043c7c;
+    padding-left: 20px ;
+    padding-right: 20px;
+    
+    /* Dark Cerulean */
+}
+
+.info h2 {
+    color: #80c5f8;
+    /* Light Sky Blue */
+    font-size: 1.5em;
+}
+
+.info h3 {
+    color: #80c5f8;
+    /* Light Sky Blue */
+    font-size: 1.2em;
+}
+
+.info p {
+    margin: 10px 0;
+    color: white;
+}

@@ -1,0 +1,52 @@
+/* error-modal.component.css */
+
+/* Contenedor del modal */
+div {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+
+}
+
+/* Título del modal */
+h1 {
+    font-size: 24px;
+    margin: 0;
+    color: #d32f2f;
+    /* Color rojo para el título */
+}
+
+.todo{
+    margin: 5px ;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+}
+
+
+/* Contenido del modal */
+.content {
+    margin: 20px 0;
+    font-size: 16px;
+    color: #333333;
+}
+
+/* Acciones del modal (botones) */
+
+/* Botón de cerrar */
+button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Estilo del botón al pasar el mouse */
+button:hover {
+    background-color: #b71c1c;
+}

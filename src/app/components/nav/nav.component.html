@@ -1,0 +1,45 @@
+<head>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<nav class="sidebar" [ngClass]="{'close': sidebarClosed}">
+
+    <header>
+        <div class="text logo">
+            <span class="name">EPIC</span>
+            <span class="profe">Imagenes NASA</span>
+        </div>
+        <i class="bx bx-menu toggle" (click)="abrir()"></i>
+    </header>
+    <div class="menu-bar">
+        <div class="menu">
+            <div class="user-info" *ngIf="user">
+                <div class="user-photo">
+                    <img [src]="user.photoUrl" alt="User Photo">
+                </div>
+                <div class="user-details">
+                    <span class="user-name">{{ user.name }}</span>
+                    <span class="user-email">{{ user.email }}</span>
+                </div>
+            </div>
+            <ul class="menu-links">
+                <li class="nav-link">
+                    <a [routerLink]="['/login']">
+                        <i class='bx bxs-image icon'></i>
+                        <span class="text nav-text">Imagenes</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom-content">
+            <li class="">
+                <a [routerLink]="['/app-login']">
+                    <i class='bx bx-exit icon'></i>
+                    <span class="text nav-text">Salir</span>
+                </a>
+            </li>
+        </div>
+
+    </div>
+
+</nav>
