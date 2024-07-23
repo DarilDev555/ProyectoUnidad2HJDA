@@ -13,12 +13,16 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { EarthImageComponent } from '../../pages/modals/earth-image/earth-image.component';
 import { MatDialog } from '@angular/material/dialog';
+import { EditarComponent } from '../../pages/modals/editar/editar.component';
+import { CommonModule } from '@angular/common';
+import { AgregarComponent } from '../../pages/modals/agregar/agregar.component';
 
 @Component({
   selector: 'app-table-epic',
   standalone: true,
   providers: [provideNativeDateAdapter()],
   imports: [
+    CommonModule,
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
@@ -99,29 +103,66 @@ export class TableEpicComponent implements AfterViewInit {
       });
   }
 
-  editar(){
+  editar(EarthImage: EarthImage) {
+    const dialogRef = this.dialog.open(EditarComponent, {
+      width: '70%', 
+      height: '70vh', 
+      data: EarthImage
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+
+      this.http.put(`https://api.nasa.gov/EPIC/api/natural/images/${EarthImage.identifier}?api_key=${this.key}`, result)
+
+      this.dataSource.data = this.dataSource.data.map((item) => {
+        if (item.identifier === EarthImage.identifier) {
+          return result;
+        } else {
+          return item;
+        }
+      });
+      
+    });
   }
 
-  borrar(){
+  agregar(){
+    const dialogRef = this.dialog.open(AgregarComponent, {
+      width: '70%', 
+      height: '70vh', 
+      data: {
+        identifier: '',
+        caption: '',
+        image: '',
+        version: '',
+        date: this.obtenerFechaGuion(new Date()),
+        lunar_j2000_position: { x: 0, y: 0, z: 0 },
+        sun_j2000_position: { x: 0, y: 0, z: 0 }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+        this.http.post(`https://api.nasa.gov/EPIC/api/natural/images?api_key=${this.key}`, result)
+        this.dataSource.data.push(result);
+    });
+
+    
+  }
+
+  borrar(id: string): void {
+    this.http.delete(`https://api.nasa.gov/EPIC/api/natural/images/${id}?api_key=${this.key}`)
+    .subscribe((data) => {
+      this.obtenerDatos(this.fechaElegida);
+    });
+
+    this.dataSource.data = this.dataSource.data.filter((item) => item.identifier !== id);
 
   }
 
   openModal(EarthImage: EarthImage) {
     this.dialog.open(EarthImageComponent, {
-  // Ajusta el ancho según tus necesidades
+      width: '70%', // Ajusta el ancho según tus necesidades
       height: '70vh', // Ajusta la altura según tus necesidades
-      data: {
-        image: EarthImage.image,
-        caption: EarthImage.caption,
-        date: EarthImage.date,
-        identifier: EarthImage.identifier,
-        lunar_j2000_position: EarthImage.lunar_j2000_position,
-        sun_j2000_position: EarthImage.sun_j2000_position,
-        version: EarthImage.version
-      },
+      data: EarthImage,
     });
   }
-  
-  
 }

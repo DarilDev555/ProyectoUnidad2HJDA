@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>Agregar Nueva Imagen</h2>
+<mat-dialog-content>
+    <form #addForm="ngForm">
+        <mat-form-field class="full-width">
+            <mat-label>Identificador</mat-label>
+            <input matInput [(ngModel)]="data.identifier" name="identifier" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Descripción</mat-label>
+            <textarea matInput [(ngModel)]="data.caption" name="caption" required></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Versión</mat-label>
+            <input matInput [(ngModel)]="data.version" name="version" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Seleccione una fecha</mat-label>
+            <input matInput [matDatepicker]="dp3" [(ngModel)]="data.date">
+            <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
+            <mat-datepicker #dp3></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Posición Lunar X</mat-label>
+            <input matInput [(ngModel)]="data.lunar_j2000_position.x" name="lunar_x" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Posición Lunar Y</mat-label>
+            <input matInput [(ngModel)]="data.lunar_j2000_position.y" name="lunar_y" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Posición Lunar Z</mat-label>
+            <input matInput [(ngModel)]="data.lunar_j2000_position.z" name="lunar_z" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Posición Solar X</mat-label>
+            <input matInput [(ngModel)]="data.sun_j2000_position.x" name="solar_x" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Posición Solar Y</mat-label>
+            <input matInput [(ngModel)]="data.sun_j2000_position.y" name="solar_y" required>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+            <mat-label>Posición Solar Z</mat-label>
+            <input matInput [(ngModel)]="data.sun_j2000_position.z" name="solar_z" required>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancelar</button>
+    <button mat-button (click)="onSaveClick()">Guardar</button>
+</mat-dialog-actions>

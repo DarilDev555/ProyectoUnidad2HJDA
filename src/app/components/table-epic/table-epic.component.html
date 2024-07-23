@@ -1,12 +1,23 @@
 <div class="mat-elevation-z8" id="contenedor-table-epic">
 
     <section id="date-table" class="d-flex">
+
+        <div class="example-flex-container">
+            <div class="example-button-container">
+                <button class="button-accion" mat-mini-fab (click)="agregar()">
+                    <mat-icon>Agregar</mat-icon>
+                </button>
+            </div>
+        </div>
+
         <mat-form-field class="d-flex">
             <mat-label>Seleccione una fecha</mat-label>
             <input matInput [matDatepicker]="dp3" [(ngModel)]="fechaElegida" (dateChange)="actualizarFecha($event)">
             <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
             <mat-datepicker #dp3></mat-datepicker>
         </mat-form-field>
+
+
     </section>
 
     <table mat-table [dataSource]="dataSource">
@@ -66,12 +77,12 @@
 
                 <div class="example-flex-container">
                     <div class="example-button-container">
-                        <button class="button-accion" mat-mini-fab (click)="editar()">
+                        <button class="button-accion" mat-mini-fab (click)="editar(element)">
                             <mat-icon>edit</mat-icon>
                         </button>
                     </div>
                     <div class="example-button-container">
-                        <button class="button-accion" mat-mini-fab (click)="borrar()">
+                        <button class="button-accion" mat-mini-fab (click)="borrar(element.identifier)">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>

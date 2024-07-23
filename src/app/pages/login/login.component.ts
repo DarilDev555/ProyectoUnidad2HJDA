@@ -1,4 +1,4 @@
-import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core'; // Import ChangeDetectionStrategy
+import { Component, inject, signal, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,38 +9,42 @@ import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../../models/Usuario.model';
 import { MatDialog } from '@angular/material/dialog';
 import { ErrorModalComponent } from '../modals/error-modal/error-modal.component';
+import { CommonModule } from '@angular/common';
+import { UsuarioService } from '../../service/usuarios.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
+  providers: [UsuarioService],
   imports: [
     MatButtonModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     FormsModule,
+    CommonModule,
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush, // Use ChangeDetectionStrategy here
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private router: Router, private dialog: MatDialog) {} // Inyectar MatDialog
+  constructor(private router: Router, private dialog: MatDialog, private serviceUser: UsuarioService) {}
 
   hide = signal(true);
   user: string = '';
   password: string = '';
   errorMessage = signal('');
-  authenticationError = signal(false); // Nueva variable para el error de autenticación
+  authenticationError = signal(false);
 
   http = inject(HttpClient);
-  usuarios: Usuario[] = [];
+  usuarios: Usuario[] = [];  // Inicializar como array vacío
 
   ngOnInit(): void {
-    this.http.get<{ results: Usuario[] }>('https://randomuser.me/api/?results=10')
+    this.http.get<Usuario[]>('https://api.escuelajs.co/api/v1/users')
       .subscribe((data) => {
-        console.log(data.results[0].login); // Inspect the response structure
-        this.usuarios = data.results;
+        this.usuarios = data; // Asignar directamente a `data`
+        console.log(this.usuarios[0]); // Verificar los datos recibidos
       });
   }
 
@@ -50,20 +54,28 @@ export class LoginComponent {
   }
 
   ingresar() {
-    let userFound = false;
-    this.usuarios.forEach((usuario) => {
-      if (usuario.login.username === this.user && usuario.login.password === this.password) {
-        this.router.navigate(['epic']);
-        userFound = true;
+    if (this.usuarios && this.usuarios.length > 0) {
+      let userFound = false;
+      this.usuarios.forEach((usuario) => {
+        if (usuario.name === this.user && usuario.password === this.password) {
+          userFound = true;
+          console.log(usuario);
+          this.router.navigate(['epic', { id: usuario.id }]);
+        }
+      });
+  
+      if (!userFound) {
+        this.updateErrorMessage();
+        this.authenticationError.set(true);
+        this.openErrorModal();
       }
-    });
-
-    if (!userFound) {
-      this.updateErrorMessage();
-      this.authenticationError.set(true); // Establecer error de autenticación a verdadero
-      this.openErrorModal(); // Abrir el modal de error
+    } else {
+      this.errorMessage.set('No users loaded. Please try again later.');
+      this.authenticationError.set(true);
+      this.openErrorModal();
     }
   }
+  
 
   updateErrorMessage() {
     if (!this.user || !this.password) {
